@@ -7,9 +7,12 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - '.:/usr/app/main'
+      - .:/usr/src/app
     ports:
-      - 5050
+      - 5050:5050
     environment:
-      - FLASK_APP=app/app
-es
+      - FLASK_APP=src/main:app
+      - FLASK_ENV=development
+      - FLASK_RUN_PORT=5050
+      - FLASK_RUN_HOST=0.0.0.0
+      - FLASK_RUN_DEBUG=True

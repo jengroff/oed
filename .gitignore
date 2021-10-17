@@ -2,4 +2,13 @@ venv/
 .venv
 *.venv
 
-.idea
+env/
+.env
+*.env
+
+.idea/
+*.idea/
+
+ngrok
+
+__pycache__
