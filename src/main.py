@@ -1,17 +1,20 @@
-import os
-
 from dotenv import load_dotenv
 from flask import Flask, request
 from twilio.twiml.messaging_response import MessagingResponse
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 from src.utils.oed import full_lookup
 
-load_dotenv()
 
-account_sid = os.getenv("TWILIO_ACCOUNT_SID")
-auth_token = os.getenv("TWILIO_AUTH_TOKEN")
+def create_app():
 
-app = Flask(__name__)
+    app = Flask(__name__)
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_port=1)
+
+    return app
+
+
+app = create_app()
 
 
 @app.route("/sms", methods=['GET', 'POST'])

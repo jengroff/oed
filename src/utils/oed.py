@@ -10,12 +10,13 @@ app_id = os.getenv("OED_APP_ID")
 app_key = os.getenv("OED_APP_KEY")
 account_sid = os.getenv("TWILIO_ACCOUNT_SID")
 auth_token = os.getenv("TWILIO_AUTH_TOKEN")
+oed_endpoint_url =  os.getenv("OED_ENDPOINT")
 
 
 def full_lookup(word: str):
     word_id = word.lower()
     language = "en-us"
-    url = f"https://od-api.oxforddictionaries.com/api/v2/entries/{language}/{word_id}?strictMatch=false"
+    url = f"{oed_endpoint_url}/{language}/{word_id}?strictMatch=false"
     response = requests.get(url, headers={'app_id': app_id, 'app_key': app_key})
     json_response = json.loads(response.text)
 
