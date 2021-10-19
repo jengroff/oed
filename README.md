@@ -37,14 +37,77 @@
 - [ngrok](https://ngrok.com/) (for testing locally)  
 - [Oxford English Dictionary API](https://developer.oxforddictionaries.com/documentation)
 
-### Try a live version ->
+---
+## Try it live!
 ##### Text any English word to the following number:
 ```
 +1 973 354 5746
 ```
 
-### Run the app ->
+-----
+## Build and run your own version locally with DOCKER ->
 
 ```
 docker-compose up -d --build
 ```
+#### (_requires your own version of the following accounts_):
+- Twilio messaging service
+- OED API
+- Heroku
+
+---
+## Use HEROKU and DOCKER to build and deploy your app ->
+### Steps (overview):
+- [Sign up](https://signup.heroku.com/) for a Heroku account
+- Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+- Create a new app
+- Log in to the Heroku Container Registry
+- Build the production image
+- Push the image to the registry
+- Release the image
+
+### Steps (detail):
+
+#### Create a new app
+```
+$  heroku create
+
+Creating app... done, ⬢ tranquil-waters-49458
+https://tranquil-waters-49458.herokuapp.com/ | https://git.heroku.com/tranquil-waters-49458.git
+```
+
+#### Log in to the [Heroku Container Registry](https://devcenter.heroku.com/articles/container-registry-and-runtime):
+```
+
+$  heroku container login
+
+```
+
+#### Build and tag it according to this format: 
+
+```
+
+registry.heroku.com/<app>/<process-type>
+
+```
+
+##### Make sure to replace `<app>` with the name of _your_ app, and `<process-type>` with `web` ->
+
+```
+
+$  docker build -f Dockerfile.prod -t registry.heroku.com/tranquil-waters-49458/web .
+
+```
+
+#### Push the image to the registry:
+```
+
+$  docker push registry.heroku.com/tranquil-waters-49458/web:latest
+
+```
+#### Release the image:
+```
+$  heroku container:release web --app tranquil-waters-49458
+```
+
+### That's it! 
