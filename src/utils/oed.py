@@ -10,7 +10,7 @@ app_id = os.getenv("OED_APP_ID")
 app_key = os.getenv("OED_APP_KEY")
 account_sid = os.getenv("TWILIO_ACCOUNT_SID")
 auth_token = os.getenv("TWILIO_AUTH_TOKEN")
-oed_endpoint_url =  os.getenv("OED_ENDPOINT")
+oed_endpoint_url = os.getenv("OED_ENDPOINT")
 
 
 def full_lookup(word: str):
@@ -26,7 +26,3 @@ def full_lookup(word: str):
         definition = "Sorry, the OED has no entry for that word."
 
     return f'"{word_id}":  {definition}'
-
-
-
-
